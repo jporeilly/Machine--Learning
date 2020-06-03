@@ -656,7 +656,7 @@ Train, Tune, Test Model in R</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>csv fi: customer transaction</from>
+      <from>csvi-customer_transaction</from>
       <to>slkp-transaction_details</to>
       <enabled>Y</enabled>
     </hop>
@@ -687,7 +687,7 @@ Train, Tune, Test Model in R</note>
     </hop>
   </order>
   <step>
-    <name>csv fi: customer transaction</name>
+    <name>csvi-customer_transaction</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1450,7 +1450,7 @@ ok.df</script>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>csv fi: customer transaction</from>
+    <from>csvi-customer_transaction</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1595,39 +1595,30 @@ ok.df</script>
     <fields>
       <field>
         <name>first_time_customer</name>
-        <rename/>
       </field>
       <field>
         <name>order_dollar_amount</name>
-        <rename/>
       </field>
       <field>
         <name>num_items</name>
-        <rename/>
       </field>
       <field>
         <name>age</name>
-        <rename/>
       </field>
       <field>
         <name>web_order</name>
-        <rename/>
       </field>
       <field>
         <name>total_transactions_to_date</name>
-        <rename/>
       </field>
       <field>
         <name>hour_of_day</name>
-        <rename/>
       </field>
       <field>
         <name>billing_shipping_zip_equal</name>
-        <rename/>
       </field>
       <field>
         <name>reported_as_fraud_historic</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
