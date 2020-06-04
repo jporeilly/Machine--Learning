@@ -1,0 +1,19 @@
+# You will need to download and install the random Forest package
+# install.packages("randomForest")
+
+# Load Random Forest Package
+library(randomForest)
+
+# Check dataset is a Data Frame
+train.df <- as.data.frame(train)
+
+# Train Model with 5 trees take 30 sceonds minutes on this VM
+rf <- randomForest(train.df$reported_as_fraud_historic ~ ., train.df, ntree=5, importance=TRUE)
+
+# Save Model to output folder: Note no spaces and double backslashes are required.
+save(rf, file="C:\\DataOps\\MLO\\labs\\fraud\\train_model_output\\rf.rdata")
+
+# Print message ok to indicate no probs..
+ok <- "Finished"
+ok.df <- as.data.frame(ok)
+ok.df
