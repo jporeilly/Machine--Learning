@@ -533,16 +533,6 @@ sources.</note>
   </notepads>
   <order>
     <hop>
-      <from>auto machine learning</from>
-      <to>filter invalid</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>billing_shipping_zip_equal</from>
-      <to>auto machine learning</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>sv-clean_values</from>
       <to>trim</to>
       <enabled>Y</enabled>
@@ -584,7 +574,7 @@ sources.</note>
     </hop>
     <hop>
       <from>slkp-transaction_fraud_report</from>
-      <to>billing_shipping_zip_equal</to>
+      <to>frmla-billing_shipping_zip_equal</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -597,160 +587,17 @@ sources.</note>
       <to>Model Catalogue (table)</to>
       <enabled>N</enabled>
     </hop>
+    <hop>
+      <from>frmla-billing_shipping_zip_equal</from>
+      <to>auto machine learning</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>auto machine learning</from>
+      <to>filter invalid</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>tfo-model_catalogue</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding>windows-1252</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>${Internal.Entry.Current.Directory}/output/model_catalogue</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-      <field>
-        <name>Iteration</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>ML_Algorithms_and_Parameters</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Cross_Validation_Performance</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>generation</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>mutation</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>crossover</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>predecessor</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>operator</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>0</precision>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Model Catalogue (table)</name>
     <type>TableOutput</type>
@@ -796,190 +643,7 @@ sources.</note>
     </GUI>
   </step>
   <step>
-    <name>auto machine learning</name>
-    <type>PythonExecutor</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <step-props secure="">
-      <group name="">
-        <property group="" name="SCRIPT">
-          <value xsi:type="xs:string">#to improve performance, increase number of generations and population size for 'tpot = TPOTClassifier(generations=1, verbosity=2,population_size=50, config_dict='TPOT light')'&#xd;
-&#xd;
-import pandas as pd&#xd;
-import numpy as np&#xd;
-&#xd;
-from tpot import TPOTClassifier&#xd;
-from sklearn import preprocessing&#xd;
-from sklearn.model_selection import train_test_split&#xd;
-&#xd;
-x = cust.iloc[:,0:-1].values #returns a numpy array&#xd;
-min_max_scaler = preprocessing.MinMaxScaler()&#xd;
-x_scaled = min_max_scaler.fit_transform(x)&#xd;
-&#xd;
-X=np.asarray(x_scaled)&#xd;
-y=np.asarray(cust.iloc[:,-1])&#xd;
-&#xd;
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=None)&#xd;
-&#xd;
-tpot = TPOTClassifier(generations=1, verbosity=2,population_size=50, config_dict='TPOT light')&#xd;
-tpot.fit(X_train, y_train)&#xd;
-output_score=str(tpot.score(X_test, y_test))&#xd;
-tpot.export('tpot_creditcard_pipeline.py')&#xd;
-print(tpot.score(X_test, y_test))&#xd;
-&#xd;
-model_name=[x[0] for x in tpot.evaluated_individuals_.items()]&#xd;
-model_gen=[x[1]['generation'] for x in tpot.evaluated_individuals_.items()]&#xd;
-model_mut=[x[1]['mutation_count'] for x in tpot.evaluated_individuals_.items()]&#xd;
-model_cross=[x[1]['crossover_count'] for x in tpot.evaluated_individuals_.items()]&#xd;
-model_predec=[x[1]['predecessor'] for x in tpot.evaluated_individuals_.items()]&#xd;
-model_opp=[x[1]['operator_count'] for x in tpot.evaluated_individuals_.items()]&#xd;
-model_cv=[str(y[1]['internal_cv_score']) for y in tpot.evaluated_individuals_.items()]&#xd;
-model_list=list(zip(model_name,model_gen,model_mut,model_cross,model_predec,model_opp,model_cv))&#xd;
-model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crossover','predecessor','operator','cv'])
-</value>
-        </property>
-        <property group="" name="LOAD_SCRIPT_AT_RUNTIME">
-          <value xsi:type="xs:boolean">false</value>
-        </property>
-        <property group="" name="SCRIPT_TO_LOAD">
-          <value xsi:type="xs:string"/>
-        </property>
-        <property group="" name="OUTPUT_FRAME_VARIABLE">
-          <value xsi:type="xs:string">model_df</value>
-        </property>
-        <property group="" name="OUTPUT_IS_FRAME">
-          <value xsi:type="xs:boolean">true</value>
-        </property>
-        <property group="" name="IS_ALL_ROWS">
-          <value xsi:type="xs:boolean">true</value>
-        </property>
-        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PYTHON_NAMES">
-          <value xsi:type="xs:string">index</value>
-          <value xsi:type="xs:string">pipe</value>
-          <value xsi:type="xs:string">generation</value>
-          <value xsi:type="xs:string">mutation</value>
-          <value xsi:type="xs:string">crossover</value>
-          <value xsi:type="xs:string">predecessor</value>
-          <value xsi:type="xs:string">operator</value>
-          <value xsi:type="xs:string">cv</value>
-        </property>
-        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PYTHON_TYPES">
-          <value xsi:type="xs:string">int64</value>
-          <value xsi:type="xs:string">String</value>
-          <value xsi:type="xs:string">String</value>
-          <value xsi:type="xs:string">int64</value>
-          <value xsi:type="xs:string">int64</value>
-          <value xsi:type="xs:string">String</value>
-          <value xsi:type="xs:string">int64</value>
-          <value xsi:type="xs:string">String</value>
-        </property>
-        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PDI_NAMES">
-          <value xsi:type="xs:string">index</value>
-          <value xsi:type="xs:string">pipeline</value>
-          <value xsi:type="xs:string">generation</value>
-          <value xsi:type="xs:string">mutation</value>
-          <value xsi:type="xs:string">crossover</value>
-          <value xsi:type="xs:string">predecessor</value>
-          <value xsi:type="xs:string">operator</value>
-          <value xsi:type="xs:string">cv</value>
-        </property>
-        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PDI_TYPES">
-          <value xsi:type="xs:string">Integer</value>
-          <value xsi:type="xs:string">String</value>
-          <value xsi:type="xs:string">String</value>
-          <value xsi:type="xs:string">Integer</value>
-          <value xsi:type="xs:string">Integer</value>
-          <value xsi:type="xs:string">String</value>
-          <value xsi:type="xs:string">Integer</value>
-          <value xsi:type="xs:string">String</value>
-        </property>
-        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PYTHON_NAMES">
-          <value xsi:type="xs:string">output_score</value>
-        </property>
-        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PYTHON_TYPES">
-          <value xsi:type="xs:string">str</value>
-        </property>
-        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PDI_NAMES">
-          <value xsi:type="xs:string">output_score</value>
-        </property>
-        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PDI_TYPES">
-          <value xsi:type="xs:string">String</value>
-        </property>
-        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PYTHON_NAMES"/>
-        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PYTHON_TYPES"/>
-        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PDI_NAMES"/>
-        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PDI_TYPES"/>
-        <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_STEP_NAMES">
-          <value xsi:type="xs:string">billing_shipping_zip_equal</value>
-          <value xsi:type="xs:string">billing_shipping_zip_equal</value>
-          <value xsi:type="xs:string">billing_shipping_zip_equal</value>
-        </property>
-        <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_VAR_NAMES">
-          <value xsi:type="xs:string">cust</value>
-          <value xsi:type="xs:string">cust</value>
-          <value xsi:type="xs:string">cust</value>
-        </property>
-        <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_DATA_STRUCTURES">
-          <value xsi:type="xs:string">Pandas dataframe</value>
-          <value xsi:type="xs:string">Pandas dataframe</value>
-          <value xsi:type="xs:string">Pandas dataframe</value>
-        </property>
-        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PYTHON_NAMES">
-          <value xsi:type="xs:string">hour_of_day</value>
-          <value xsi:type="xs:string">billing_shipping_zip_equal</value>
-          <value xsi:type="xs:string">reported_as_fraud_historic</value>
-        </property>
-        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PYTHON_TYPES">
-          <value xsi:type="xs:string">int64</value>
-          <value xsi:type="xs:string">bool</value>
-          <value xsi:type="xs:string">bool</value>
-        </property>
-        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PDI_NAMES">
-          <value xsi:type="xs:string">hour_of_day</value>
-          <value xsi:type="xs:string">billing_shipping_zip_equal</value>
-          <value xsi:type="xs:string">reported_as_fraud_historic</value>
-        </property>
-        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PDI_TYPES">
-          <value xsi:type="xs:string">Integer</value>
-          <value xsi:type="xs:string">Boolean</value>
-          <value xsi:type="xs:string">Boolean</value>
-        </property>
-        <property group="" name="EMBED_USE_ENV">
-          <value xsi:type="xs:boolean">true</value>
-        </property>
-        <property group="" name="FILE_USE_ENV">
-          <value xsi:type="xs:boolean">false</value>
-        </property>
-        <property group="" name="EMBED_ENV_PATH">
-          <value xsi:type="xs:string">C:\Python\Python38\python.exe</value>
-        </property>
-        <property group="" name="FILE_ENV_PATH">
-          <value xsi:type="xs:string"/>
-        </property>
-      </group>
-    </step-props>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>billing_shipping_zip_equal</name>
+    <name>frmla-billing_shipping_zip_equal</name>
     <type>Formula</type>
     <description/>
     <distribute>Y</distribute>
@@ -1008,148 +672,6 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     <GUI>
       <xloc>576</xloc>
       <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>sv-clean_values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>index</name>
-        <rename>Iteration</rename>
-      </field>
-      <field>
-        <name>cv</name>
-        <rename>Cross_Validation_Performance</rename>
-      </field>
-      <field>
-        <name>pipeline</name>
-        <rename>ML_Algorithms_and_Parameters</rename>
-      </field>
-      <field>
-        <name>generation</name>
-        <rename/>
-      </field>
-      <field>
-        <name>mutation</name>
-        <rename/>
-      </field>
-      <field>
-        <name>crossover</name>
-        <rename/>
-      </field>
-      <field>
-        <name>predecessor</name>
-        <rename/>
-      </field>
-      <field>
-        <name>operator</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Cross_Validation_Performance</name>
-        <rename>Cross_Validation_Performance</rename>
-        <type>Number</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>filter invalid</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>sv-clean_values</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>Y</negated>
-            <leftvalue>cv</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>-inf</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-          <condition>
-            <negated>Y</negated>
-            <operator>AND</operator>
-            <leftvalue>generation</leftvalue>
-            <function>CONTAINS</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>INVALID</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask/>
-            </value>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1285,91 +807,6 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     <GUI>
       <xloc>160</xloc>
       <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>csvi_customer_billing</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/data/customer_billing.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
-    <fields>
-      <field>
-        <name>customer_id</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>transaction_id</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>card_number</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>expiry_date</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1687,8 +1124,8 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     </GUI>
   </step>
   <step>
-    <name>slkp-customer</name>
-    <type>StreamLookup</type>
+    <name>csvi_customer_billing</name>
+    <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1697,35 +1134,66 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>csvi_customer_billing</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
+    <filename>${Internal.Entry.Current.Directory}/data/customer_billing.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
         <name>customer_id</name>
-        <field>customer_id</field>
-      </key>
-      <value>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
         <name>transaction_id</name>
-        <rename>transaction_id</rename>
-        <default/>
         <type>Integer</type>
-      </value>
-      <value>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
         <name>card_number</name>
-        <rename>card_number</rename>
-        <default/>
         <type>Integer</type>
-      </value>
-      <value>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
         <name>expiry_date</name>
-        <rename>expiry_date</rename>
-        <default/>
         <type>Integer</type>
-      </value>
-    </lookup>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1736,7 +1204,72 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     </remotesteps>
     <GUI>
       <xloc>272</xloc>
-      <yloc>288</yloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>filter invalid</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>sv-clean_values</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>Y</negated>
+            <leftvalue>cv</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>-inf</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+          <condition>
+            <negated>Y</negated>
+            <operator>AND</operator>
+            <leftvalue>generation</leftvalue>
+            <function>CONTAINS</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>INVALID</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1883,6 +1416,60 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     </GUI>
   </step>
   <step>
+    <name>slkp-customer</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>csvi_customer_billing</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>customer_id</name>
+        <field>customer_id</field>
+      </key>
+      <value>
+        <name>transaction_id</name>
+        <rename>transaction_id</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>card_number</name>
+        <rename>card_number</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>expiry_date</name>
+        <rename>expiry_date</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>slkp-transaction_fraud_report</name>
     <type>StreamLookup</type>
     <description/>
@@ -1920,6 +1507,231 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     </remotesteps>
     <GUI>
       <xloc>576</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv-clean_values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>index</name>
+        <rename>Iteration</rename>
+      </field>
+      <field>
+        <name>cv</name>
+        <rename>Cross_Validation_Performance</rename>
+      </field>
+      <field>
+        <name>pipeline</name>
+        <rename>ML_Algorithms_and_Parameters</rename>
+      </field>
+      <field>
+        <name>generation</name>
+      </field>
+      <field>
+        <name>mutation</name>
+      </field>
+      <field>
+        <name>crossover</name>
+      </field>
+      <field>
+        <name>predecessor</name>
+      </field>
+      <field>
+        <name>operator</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Cross_Validation_Performance</name>
+        <rename>Cross_Validation_Performance</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>tfo-model_catalogue</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${Internal.Entry.Current.Directory}/output/model_catalogue</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+      <field>
+        <name>Iteration</name>
+        <type>Integer</type>
+        <format>####0;-####0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>ML_Algorithms_and_Parameters</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Cross_Validation_Performance</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>generation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>mutation</name>
+        <type>Integer</type>
+        <format>####0;-####0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>crossover</name>
+        <type>Integer</type>
+        <format>####0;-####0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>predecessor</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>operator</name>
+        <type>Integer</type>
+        <format>####0;-####0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>0</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1964,6 +1776,189 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       <draw>Y</draw>
     </GUI>
   </step>
+  <step>
+    <name>auto machine learning</name>
+    <type>PythonExecutor</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <step-props secure="">
+      <group name="">
+        <property group="" name="SCRIPT">
+          <value xsi:type="xs:string">#to improve performance, increase number of generations and population size for 'tpot = TPOTClassifier(generations=1, verbosity=2,population_size=50, config_dict='TPOT light')'&#xd;
+&#xd;
+import pandas as pd&#xd;
+import numpy as np&#xd;
+&#xd;
+from tpot import TPOTClassifier&#xd;
+from sklearn import preprocessing&#xd;
+from sklearn.model_selection import train_test_split&#xd;
+&#xd;
+x = cust.iloc[:,0:-1].values #returns a numpy array&#xd;
+min_max_scaler = preprocessing.MinMaxScaler()&#xd;
+x_scaled = min_max_scaler.fit_transform(x)&#xd;
+&#xd;
+X=np.asarray(x_scaled)&#xd;
+y=np.asarray(cust.iloc[:,-1])&#xd;
+&#xd;
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=None)&#xd;
+&#xd;
+tpot = TPOTClassifier(generations=1, verbosity=2,population_size=50, config_dict='TPOT light')&#xd;
+tpot.fit(X_train, y_train)&#xd;
+output_score=str(tpot.score(X_test, y_test))&#xd;
+tpot.export('tpot_creditcard_pipeline.py')&#xd;
+print(tpot.score(X_test, y_test))&#xd;
+&#xd;
+model_name=[x[0] for x in tpot.evaluated_individuals_.items()]&#xd;
+model_gen=[x[1]['generation'] for x in tpot.evaluated_individuals_.items()]&#xd;
+model_mut=[x[1]['mutation_count'] for x in tpot.evaluated_individuals_.items()]&#xd;
+model_cross=[x[1]['crossover_count'] for x in tpot.evaluated_individuals_.items()]&#xd;
+model_predec=[x[1]['predecessor'] for x in tpot.evaluated_individuals_.items()]&#xd;
+model_opp=[x[1]['operator_count'] for x in tpot.evaluated_individuals_.items()]&#xd;
+model_cv=[str(y[1]['internal_cv_score']) for y in tpot.evaluated_individuals_.items()]&#xd;
+model_list=list(zip(model_name,model_gen,model_mut,model_cross,model_predec,model_opp,model_cv))&#xd;
+model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crossover','predecessor','operator','cv'])
+</value>
+        </property>
+        <property group="" name="LOAD_SCRIPT_AT_RUNTIME">
+          <value xsi:type="xs:boolean">false</value>
+        </property>
+        <property group="" name="SCRIPT_TO_LOAD">
+          <value xsi:type="xs:string"/>
+        </property>
+        <property group="" name="OUTPUT_FRAME_VARIABLE">
+          <value xsi:type="xs:string">model_df</value>
+        </property>
+        <property group="" name="OUTPUT_IS_FRAME">
+          <value xsi:type="xs:boolean">true</value>
+        </property>
+        <property group="" name="IS_ALL_ROWS">
+          <value xsi:type="xs:boolean">true</value>
+        </property>
+        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PYTHON_NAMES">
+          <value xsi:type="xs:string">index</value>
+          <value xsi:type="xs:string">pipe</value>
+          <value xsi:type="xs:string">generation</value>
+          <value xsi:type="xs:string">mutation</value>
+          <value xsi:type="xs:string">crossover</value>
+          <value xsi:type="xs:string">predecessor</value>
+          <value xsi:type="xs:string">operator</value>
+          <value xsi:type="xs:string">cv</value>
+        </property>
+        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PYTHON_TYPES">
+          <value xsi:type="xs:string">int64</value>
+          <value xsi:type="xs:string">String</value>
+          <value xsi:type="xs:string">String</value>
+          <value xsi:type="xs:string">int64</value>
+          <value xsi:type="xs:string">int64</value>
+          <value xsi:type="xs:string">String</value>
+          <value xsi:type="xs:string">int64</value>
+          <value xsi:type="xs:string">String</value>
+        </property>
+        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PDI_NAMES">
+          <value xsi:type="xs:string">index</value>
+          <value xsi:type="xs:string">pipeline</value>
+          <value xsi:type="xs:string">generation</value>
+          <value xsi:type="xs:string">mutation</value>
+          <value xsi:type="xs:string">crossover</value>
+          <value xsi:type="xs:string">predecessor</value>
+          <value xsi:type="xs:string">operator</value>
+          <value xsi:type="xs:string">cv</value>
+        </property>
+        <property group="" name="OUTPUT_FRAME_MAPPING.FIELD_PDI_TYPES">
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">String</value>
+          <value xsi:type="xs:string">String</value>
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">String</value>
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">String</value>
+        </property>
+        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PYTHON_NAMES">
+          <value xsi:type="xs:string">output_score</value>
+        </property>
+        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PYTHON_TYPES">
+          <value xsi:type="xs:string">str</value>
+        </property>
+        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PDI_NAMES">
+          <value xsi:type="xs:string">output_score</value>
+        </property>
+        <property group="" name="OUTPUT_VARIABLE_MAPPING.FIELD_PDI_TYPES">
+          <value xsi:type="xs:string">String</value>
+        </property>
+        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PYTHON_NAMES"/>
+        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PYTHON_TYPES"/>
+        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PDI_NAMES"/>
+        <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PDI_TYPES"/>
+        <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_STEP_NAMES">
+          <value xsi:type="xs:string">frmla-billing_shipping_zip_equal</value>
+          <value xsi:type="xs:string">frmla-billing_shipping_zip_equal</value>
+          <value xsi:type="xs:string">frmla-billing_shipping_zip_equal</value>
+        </property>
+        <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_VAR_NAMES">
+          <value xsi:type="xs:string">cust</value>
+          <value xsi:type="xs:string">cust</value>
+          <value xsi:type="xs:string">cust</value>
+        </property>
+        <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_DATA_STRUCTURES">
+          <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
+        </property>
+        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PYTHON_NAMES">
+          <value xsi:type="xs:string">hour_of_day</value>
+          <value xsi:type="xs:string">billing_shipping_zip_equal</value>
+          <value xsi:type="xs:string">reported_as_fraud_historic</value>
+        </property>
+        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PYTHON_TYPES">
+          <value xsi:type="xs:string">int64</value>
+          <value xsi:type="xs:string">bool</value>
+          <value xsi:type="xs:string">bool</value>
+        </property>
+        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PDI_NAMES">
+          <value xsi:type="xs:string">hour_of_day</value>
+          <value xsi:type="xs:string">billing_shipping_zip_equal</value>
+          <value xsi:type="xs:string">reported_as_fraud_historic</value>
+        </property>
+        <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PDI_TYPES">
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">Boolean</value>
+          <value xsi:type="xs:string">Boolean</value>
+        </property>
+        <property group="" name="EMBED_USE_ENV">
+          <value xsi:type="xs:boolean">true</value>
+        </property>
+        <property group="" name="FILE_USE_ENV">
+          <value xsi:type="xs:boolean">false</value>
+        </property>
+        <property group="" name="EMBED_ENV_PATH">
+          <value xsi:type="xs:string">C:\Python\Python38\python.exe</value>
+        </property>
+        <property group="" name="FILE_ENV_PATH">
+          <value xsi:type="xs:string"/>
+        </property>
+      </group>
+    </step-props>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
@@ -1973,39 +1968,11 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     <group>
       <name>explorerState</name>
       <attribute>
-        <key>sv-clean_values</key>
+        <key>frmla-billing_shipping_zip_equal</key>
         <value/>
       </attribute>
       <attribute>
-        <key>csvi-customer   </key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>slkp-customer</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>slkp-transaction_fraud_report</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>csvi-transaction_fraud_report</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>slkp transaction_details</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>csvi_customer_billing</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>csvi-customer transaction</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>tfo-model_catalogue</key>
+        <key>py-autoML</key>
         <value/>
       </attribute>
     </group>
