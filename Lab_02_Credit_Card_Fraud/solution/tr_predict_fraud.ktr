@@ -1706,27 +1706,35 @@ submission
     <fields>
       <field>
         <name>first_time_customer</name>
+        <rename/>
       </field>
       <field>
         <name>order_dollar_amount</name>
+        <rename/>
       </field>
       <field>
         <name>num_items</name>
+        <rename/>
       </field>
       <field>
         <name>age</name>
+        <rename/>
       </field>
       <field>
         <name>web_order</name>
+        <rename/>
       </field>
       <field>
         <name>total_transactions_to_date</name>
+        <rename/>
       </field>
       <field>
         <name>hour_of_day</name>
+        <rename/>
       </field>
       <field>
         <name>billing_shipping_zip_equal</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1809,72 +1817,95 @@ submission
     <fields>
       <field>
         <name>customer_name</name>
+        <rename/>
       </field>
       <field>
         <name>customer_id</name>
+        <rename/>
       </field>
       <field>
         <name>customer_billing_zip</name>
+        <rename/>
       </field>
       <field>
         <name>transaction_id</name>
+        <rename/>
       </field>
       <field>
         <name>card_number</name>
+        <rename/>
       </field>
       <field>
         <name>expiry_date</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_address</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_city</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_country</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_customer_number</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_email</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_name</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_phone</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_state</name>
+        <rename/>
       </field>
       <field>
         <name>ship_to_zip</name>
+        <rename/>
       </field>
       <field>
         <name>first_time_customer</name>
+        <rename/>
       </field>
       <field>
         <name>order_dollar_amount</name>
+        <rename/>
       </field>
       <field>
         <name>num_items</name>
+        <rename/>
       </field>
       <field>
         <name>age</name>
+        <rename/>
       </field>
       <field>
         <name>web_order</name>
+        <rename/>
       </field>
       <field>
         <name>total_transactions_to_date</name>
+        <rename/>
       </field>
       <field>
         <name>hour_of_day</name>
+        <rename/>
       </field>
       <field>
         <name>billing_shipping_zip_equal</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>

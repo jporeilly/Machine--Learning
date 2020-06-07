@@ -604,6 +604,11 @@ sources.</note>
     </hop>
     <hop>
       <from>frmla-billing_shipping_zip_equal</from>
+      <to>sv-change_to_numbers</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv-change_to_numbers</from>
       <to>tfo-TPOT</to>
       <enabled>Y</enabled>
     </hop>
@@ -1445,7 +1450,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       </field>
       <field>
         <name>first_time_customer</name>
-        <type>String</type>
+        <type>Boolean</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1489,7 +1494,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       </field>
       <field>
         <name>web_order</name>
-        <type>String</type>
+        <type>Boolean</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2136,13 +2141,13 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       <field>
         <name>first_time_customer</name>
         <type>Number</type>
-        <format/>
+        <format>0</format>
         <currency/>
-        <decimal/>
-        <group/>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>-1</length>
+        <length>1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -2184,13 +2189,13 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       <field>
         <name>web_order</name>
         <type>Number</type>
-        <format/>
+        <format>0</format>
         <currency/>
-        <decimal/>
-        <group/>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>-1</length>
+        <length>1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -2207,7 +2212,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       </field>
       <field>
         <name>hour_of_day</name>
-        <type>Number</type>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2220,25 +2225,25 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       <field>
         <name>billing_shipping_zip_equal</name>
         <type>Number</type>
-        <format/>
+        <format>0</format>
         <currency/>
-        <decimal/>
-        <group/>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>-1</length>
+        <length>1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>reported_as_fraud_historic</name>
         <type>Number</type>
-        <format/>
+        <format>0</format>
         <currency/>
-        <decimal/>
-        <group/>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>-1</length>
+        <length>1</length>
         <precision>-1</precision>
       </field>
     </fields>
@@ -2252,7 +2257,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     </remotesteps>
     <GUI>
       <xloc>720</xloc>
-      <yloc>400</yloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2296,6 +2301,138 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       <draw>Y</draw>
     </GUI>
   </step>
+  <step>
+    <name>sv-change_to_numbers</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>first_time_customer</name>
+        <rename/>
+      </field>
+      <field>
+        <name>order_dollar_amount</name>
+        <rename/>
+      </field>
+      <field>
+        <name>num_items</name>
+        <rename/>
+      </field>
+      <field>
+        <name>age</name>
+        <rename/>
+      </field>
+      <field>
+        <name>web_order</name>
+        <rename/>
+      </field>
+      <field>
+        <name>total_transactions_to_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>hour_of_day</name>
+        <rename/>
+      </field>
+      <field>
+        <name>billing_shipping_zip_equal</name>
+        <rename/>
+      </field>
+      <field>
+        <name>reported_as_fraud_historic</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>first_time_customer</name>
+        <rename>first_time_customer</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>web_order</name>
+        <rename>web_order</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>billing_shipping_zip_equal</name>
+        <rename>billing_shipping_zip_equal</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>reported_as_fraud_historic</name>
+        <rename>reported_as_fraud_historic</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
@@ -2304,6 +2441,10 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
   <attributes>
     <group>
       <name>explorerState</name>
+      <attribute>
+        <key>sv-change_to_numbers</key>
+        <value/>
+      </attribute>
     </group>
   </attributes>
 </transformation>
