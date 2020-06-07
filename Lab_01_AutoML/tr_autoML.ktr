@@ -535,12 +535,12 @@ sources.</note>
     <hop>
       <from>sv-clean_values</from>
       <to>trim</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>filter invalid</from>
       <to>sv-clean_values</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>csvi-customer   </from>
@@ -585,22 +585,22 @@ sources.</note>
     <hop>
       <from>frmla-billing_shipping_zip_equal</from>
       <to>auto machine learning</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>auto machine learning</from>
       <to>filter invalid</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>trim</from>
       <to>Microsoft Excel writer</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>trim</from>
       <to>Text file output</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>frmla-billing_shipping_zip_equal</from>
@@ -2256,7 +2256,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>736</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2428,7 +2428,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>736</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
