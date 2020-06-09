@@ -546,10 +546,10 @@ Train, Tune, Test Model in R</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>This transformation will train the data using Random Forest</note>
+      <note>This transformation will train the data using: randomForest</note>
       <xloc>528</xloc>
       <yloc>80</yloc>
-      <width>324</width>
+      <width>320</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -682,7 +682,7 @@ Train, Tune, Test Model in R</note>
     </hop>
     <hop>
       <from>sv-convert_booleans_to_numbers</from>
-      <to>rscrpt-train_model _random_ forest</to>
+      <to>rscrpt-train_model_randomForest</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1277,7 +1277,7 @@ FROM strataml_customer_billing
     </GUI>
   </step>
   <step>
-    <name>rscrpt-train_model _random_ forest</name>
+    <name>rscrpt-train_model_randomForest</name>
     <type>RScriptExcecutor</type>
     <description/>
     <distribute>Y</distribute>
@@ -1295,25 +1295,33 @@ FROM strataml_customer_billing
     <output_is_raw_text>N</output_is_raw_text>
     <strings_as_factors>Y</strings_as_factors>
     <include_input_as_output>N</include_input_as_output>
-    <script># You will need to download and install the random Forest package
-# install.packages("randomForest")
+    <script># the following packages need to be installed (see pre-requisites)
+# rJava
+# randomForest
 
-# Load Random Forest Package
-library(randomForest)
+# load randomForest package
 
-# Check dataset is a Data Frame
-train.df &lt;- as.data.frame(train)
 
-# Train Model with 10 trees take 30 sceonds minutes on this VM
-rf &lt;- randomForest(train.df$reported_as_fraud_historic ~ ., train.df, ntree=10, importance=TRUE)
+# the dataset is referenced in the step: sv-convert_booleans_to_numbers
+# assign the dataframe: train to variable: train.df
 
-# Save Model to output folder: Note no spaces and double backslashes are required.
-save(rf, file="C:\\Machine--Learning\\Lab_02_Credit_Card_Fraud\\train_model_output\\rf.rdata")
 
-# Print message ok to indicate no probs..
-ok &lt;- "Finished"
-ok.df &lt;- as.data.frame(ok)
-ok.df</script>
+# train model with 5 trees takes about 30 seconds on this VM
+# declare variable rf assigned the results
+# ( y) dependent variable = train.df (dataset) reported_as_fraud_historic (column)
+# ~ (tilde) . (point) = (x) independent variables
+
+
+# save model to output folder: Note no spaces and double backslashes are required.
+
+
+# print message ok to indicate no probs..
+# declare variable: ok assigned with the value "Finished"
+
+
+# assign variable ok to dataframe: ok.df
+
+</script>
     <r_log_level>Detailed</r_log_level>
     <load_r_script_at_runtime>N</load_r_script_at_runtime>
     <r_script_to_load/>

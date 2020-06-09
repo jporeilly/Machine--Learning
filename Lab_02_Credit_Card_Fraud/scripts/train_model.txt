@@ -1,19 +1,27 @@
-# You will need to download and install the random Forest package
-# install.packages("randomForest")
+# the following packages need to be installed (see pre-requisites)
+# rJava
+# randomForest
 
-# Load Random Forest Package
+# load randomForest package
 library(randomForest)
 
-# Check dataset is a Data Frame
+# the dataset is referenced in the step: sv-convert_booleans_to_numbers
+# assign the dataframe: train to variable: train.df
 train.df <- as.data.frame(train)
 
-# Train Model with 5 trees take 30 sceonds minutes on this VM
-rf <- randomForest(train.df$reported_as_fraud_historic ~ ., train.df, ntree=5, importance=TRUE)
+# train model with 8 trees takes about 50 seconds on this VM
+# declare variable rf assigned the results
+# ( y) dependent variable = train.df (dataset) reported_as_fraud_historic (column)
+# ~ (tilde) . (point) = (x) independent variables
+rf <- randomForest(train.df$reported_as_fraud_historic ~ ., train.df, ntree=8, importance=TRUE)
 
-# Save Model to output folder: Note no spaces and double backslashes are required.
-save(rf, file="C:\\DataOps\\MLO\\labs\\fraud\\train_model_output\\rf.rdata")
+# save model to output folder: Note no spaces and double backslashes are required.
+save(rf, file="C:\\Machine—Learning\\Lab_02_Credit_Card_Fraud\\train_model_output\\rf.rdata")
 
-# Print message ok to indicate no probs..
+# print message ok to indicate no probs..
+# declare variable: ok assigned with the value “Finished”
 ok <- "Finished"
+
+# assign variable ok to dataframe: ok.df
 ok.df <- as.data.frame(ok)
 ok.df

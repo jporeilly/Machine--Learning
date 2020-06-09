@@ -377,7 +377,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>train_the_model</name>
+      <name>train_model</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -481,7 +481,7 @@
   <hops>
     <hop>
       <from>START</from>
-      <to>train_the_model</to>
+      <to>train_model</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -489,7 +489,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>train_the_model</from>
+      <from>train_model</from>
       <to>predict_fraud</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -507,7 +507,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>train_the_model</from>
+      <from>train_model</from>
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -586,10 +586,6 @@
     </group>
     <group>
       <name>{"_":"Embedded MetaStore Elements","namespace":"pentaho","type":"Default Run Configuration"}</name>
-      <attribute>
-        <key>Pentaho local</key>
-        <value>{"children":[{"children":[],"id":"server","value":null},{"children":[],"id":"clustered","value":"N"},{"children":[],"id":"name","value":"Pentaho local"},{"children":[],"id":"description","value":null},{"children":[],"id":"pentaho","value":"N"},{"children":[],"id":"readOnly","value":"Y"},{"children":[],"id":"sendResources","value":"N"},{"children":[],"id":"logRemoteExecutionLocally","value":"N"},{"children":[],"id":"remote","value":"N"},{"children":[],"id":"local","value":"Y"},{"children":[],"id":"showTransformations","value":"N"}],"id":"Pentaho local","value":null,"name":"Pentaho local","owner":null,"ownerPermissionsList":[]}</value>
-      </attribute>
     </group>
   </attributes>
 </job>

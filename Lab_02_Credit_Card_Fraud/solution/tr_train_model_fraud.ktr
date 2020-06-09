@@ -708,186 +708,7 @@ Deploy Model in R (randomForest)</note>
       <to>rscrpt-train_model _random_ forest</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>sv-convert_booleans_to_numbers</from>
-      <to>Microsoft Excel writer</to>
-      <enabled>N</enabled>
-    </hop>
   </order>
-  <step>
-    <name>Microsoft Excel writer</name>
-    <type>TypeExitExcelWriterStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <makeSheetActive>Y</makeSheetActive>
-    <rowWritingMethod>overwrite</rowWritingMethod>
-    <startingCell>A1</startingCell>
-    <appendOmitHeader>N</appendOmitHeader>
-    <appendOffset>0</appendOffset>
-    <appendEmpty>0</appendEmpty>
-    <rowWritingMethod>overwrite</rowWritingMethod>
-    <forceFormulaRecalculation>Y</forceFormulaRecalculation>
-    <leaveExistingStylesUnchanged>Y</leaveExistingStylesUnchanged>
-    <appendLines>N</appendLines>
-    <add_to_result_filenames>N</add_to_result_filenames>
-    <file>
-      <name>${Internal.Entry.Current.Directory}\train_dataset</name>
-      <extention>xlsx</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>dataset</sheetname>
-      <autosizecolums>Y</autosizecolums>
-      <stream_data>N</stream_data>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <protected_by/>
-      <splitevery>0</splitevery>
-      <if_file_exists>new</if_file_exists>
-      <if_sheet_exists>reuse</if_sheet_exists>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <sheet_enabled>N</sheet_enabled>
-      <filename>template.xls</filename>
-      <sheetname/>
-      <hidden>N</hidden>
-    </template>
-    <fields>
-      <field>
-        <name>first_time_customer</name>
-        <type>Number</type>
-        <format>0</format>
-        <title>first_time_customer</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>order_dollar_amount</name>
-        <type>Number</type>
-        <format>00000.0</format>
-        <title>order_dollar_amount</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>num_items</name>
-        <type>Integer</type>
-        <format/>
-        <title>num_items</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>age</name>
-        <type>Number</type>
-        <format>0000.0</format>
-        <title>age</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>web_order</name>
-        <type>Number</type>
-        <format>0</format>
-        <title>web_order</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>total_transactions_to_date</name>
-        <type>Integer</type>
-        <format/>
-        <title>total_transactions_to_date</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>hour_of_day</name>
-        <type>Integer</type>
-        <format/>
-        <title>hour_of_day</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>billing_shipping_zip_equal</name>
-        <type>Number</type>
-        <format>0</format>
-        <title>billing_shipping_zip_equal</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-      <field>
-        <name>reported_as_fraud_historic</name>
-        <type>Number</type>
-        <format>0</format>
-        <title>reported_as_fraud_historic</title>
-        <titleStyleCell/>
-        <styleCell/>
-        <commentField/>
-        <commentAuthorField/>
-        <formula>N</formula>
-        <hyperlinkField/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>576</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>csv fi: customer transaction</name>
     <type>CsvInput</type>
@@ -1497,28 +1318,15 @@ FROM strataml_customer_billing
     <output_is_raw_text>N</output_is_raw_text>
     <strings_as_factors>Y</strings_as_factors>
     <include_input_as_output>N</include_input_as_output>
-    <script># You will need to download and install the random Forest package
-# install.packages("randomForest")
+    <script>library(randomForest)
 
-
-# Load Random Forest Package
-library(randomForest)
-
-# Check dataset is a Data Frame
 train.df &lt;- as.data.frame(train)
+rf &lt;- randomForest(train.df$reported_as_fraud_historic ~ ., train.df, ntree=8, importance=TRUE)
+save(rf, file="C:\\Machine--Learning\\Lab_02_Credit_Card_Fraud\\train_model_output\\rf.rdata")
 
-
-# Train Model with 5 trees take 30 sceonds minutes on this VM
-rf &lt;- randomForest(train.df$reported_as_fraud_historic ~ ., train.df, ntree=5, importance=TRUE)
-
-# Save Model to output folder: Note no spaces and double backslashes are required.
-save(rf, file="C:\\DataOps\\MLO\\labs\\fraud\\solution\\train_model_output\\rf.rdata")
-
-# Print message ok to indicate no probs..
 ok &lt;- "Finished"
 ok.df &lt;- as.data.frame(ok)
-ok.df
-</script>
+ok.df</script>
     <r_log_level>Basic</r_log_level>
     <load_r_script_at_runtime>N</load_r_script_at_runtime>
     <r_script_to_load/>

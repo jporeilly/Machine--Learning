@@ -1242,11 +1242,11 @@ FROM strataml_customer_billing
     <forceFormulaRecalculation>Y</forceFormulaRecalculation>
     <leaveExistingStylesUnchanged>Y</leaveExistingStylesUnchanged>
     <appendLines>N</appendLines>
-    <add_to_result_filenames>Y</add_to_result_filenames>
+    <add_to_result_filenames>N</add_to_result_filenames>
     <file>
       <name>${Internal.Entry.Current.Directory}\output\credit_card_predict</name>
       <extention>xlsx</extention>
-      <do_not_open_newfile_init>Y</do_not_open_newfile_init>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
       <split>N</split>
       <add_date>N</add_date>
       <add_time>N</add_time>
@@ -1259,8 +1259,8 @@ FROM strataml_customer_billing
       <password>Encrypted </password>
       <protected_by/>
       <splitevery>0</splitevery>
-      <if_file_exists>reuse</if_file_exists>
-      <if_sheet_exists>reuse</if_sheet_exists>
+      <if_file_exists>new</if_file_exists>
+      <if_sheet_exists>new</if_sheet_exists>
     </file>
     <template>
       <enabled>N</enabled>
@@ -1270,6 +1270,30 @@ FROM strataml_customer_billing
       <hidden>N</hidden>
     </template>
     <fields>
+      <field>
+        <name>transaction_id</name>
+        <type>Number</type>
+        <format/>
+        <title>transaction_id</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
+      </field>
+      <field>
+        <name>card_number</name>
+        <type>Number</type>
+        <format/>
+        <title>card_number</title>
+        <titleStyleCell/>
+        <styleCell/>
+        <commentField/>
+        <commentAuthorField/>
+        <formula>N</formula>
+        <hyperlinkField/>
+      </field>
       <field>
         <name>first_time_customer</name>
         <type>Number</type>
@@ -1412,26 +1436,35 @@ FROM strataml_customer_billing
     <output_is_raw_text>N</output_is_raw_text>
     <strings_as_factors>Y</strings_as_factors>
     <include_input_as_output>N</include_input_as_output>
-    <script># Load Random Forest Package
-library(randomForest)
+    <script># the following packages need to be installed (see pre-requisites)
+# rJava
+# randomForest
 
-# Convert Test Data to Data Frame
-test.df &lt;- as.data.frame(test)
+# load randomForest package
 
-# Load Random Forest Model
-load("C:\\DataOps\\MLO\\labs\\fraud\\train_model_output\\rf.rdata")
 
-# Predict
-pred &lt;- predict(rf, newdata = test.df)
+# the dataset is referenced in the step: sv-convert_booleans_to_numbers
+# assign the dataframe: test to variable: test.df
 
-# Convert to Data Frame
-pred.df &lt;- as.data.frame(pred)
 
-# Prepare output data
-submission &lt;- data.frame(cbind(test.df,pred.df))
+# load randomForest Model
 
-# Output data
-submission
+
+# declare a variable pred which is assigned the results of using the predict function
+# predict function runs our randomForest model against test.df = newdata
+# predict with new test data
+
+
+# assign pred dataframe to pred.df variable
+
+
+# prepare output data
+# using cbind function to bind pred.df to test.df
+
+
+# output data
+
+
 
 
 
@@ -1446,6 +1479,14 @@ submission
       <step_name0>sv-convert_booleans_to_numbers</step_name0>
     </incoming_step_names>
     <output_fields>
+      <out_field>
+        <field_name>transaction_id</field_name>
+        <type>Number</type>
+      </out_field>
+      <out_field>
+        <field_name>card_number</field_name>
+        <type>Number</type>
+      </out_field>
       <out_field>
         <field_name>first_time_customer</field_name>
         <type>Number</type>
@@ -1706,6 +1747,12 @@ submission
     </partitioning>
     <fields>
       <field>
+        <name>transaction_id</name>
+      </field>
+      <field>
+        <name>card_number</name>
+      </field>
+      <field>
         <name>first_time_customer</name>
       </field>
       <field>
@@ -1810,97 +1857,91 @@ submission
     <fields>
       <field>
         <name>customer_name</name>
-        <rename/>
       </field>
       <field>
         <name>customer_id</name>
-        <rename/>
       </field>
       <field>
         <name>customer_billing_zip</name>
-        <rename/>
       </field>
       <field>
         <name>transaction_id</name>
-        <rename/>
       </field>
       <field>
         <name>card_number</name>
-        <rename/>
       </field>
       <field>
         <name>expiry_date</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_address</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_city</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_country</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_customer_number</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_email</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_name</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_phone</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_state</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_zip</name>
-        <rename/>
       </field>
       <field>
         <name>first_time_customer</name>
-        <rename/>
       </field>
       <field>
         <name>order_dollar_amount</name>
-        <rename/>
       </field>
       <field>
         <name>num_items</name>
-        <rename/>
       </field>
       <field>
         <name>age</name>
-        <rename/>
       </field>
       <field>
         <name>web_order</name>
-        <rename/>
       </field>
       <field>
         <name>total_transactions_to_date</name>
-        <rename/>
       </field>
       <field>
         <name>hour_of_day</name>
-        <rename/>
       </field>
       <field>
         <name>billing_shipping_zip_equal</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>transaction_id</name>
+        <rename>transaction_id</rename>
+        <type>Number</type>
+        <length>15</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
       <meta>
         <name>card_number</name>
         <rename>card_number</rename>

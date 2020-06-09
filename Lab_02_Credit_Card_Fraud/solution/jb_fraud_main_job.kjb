@@ -377,7 +377,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>train model</name>
+      <name>train_model</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -415,7 +415,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>predict fraud</name>
+      <name>predict_fraud</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -481,7 +481,7 @@
   <hops>
     <hop>
       <from>START</from>
-      <to>train model</to>
+      <to>train_model</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -489,8 +489,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>train model</from>
-      <to>predict fraud</to>
+      <from>train_model</from>
+      <to>predict_fraud</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -498,7 +498,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>predict fraud</from>
+      <from>predict_fraud</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -507,7 +507,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>train model</from>
+      <from>train_model</from>
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -516,7 +516,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>predict fraud</from>
+      <from>predict_fraud</from>
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

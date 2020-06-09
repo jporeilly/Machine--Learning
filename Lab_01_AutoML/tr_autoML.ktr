@@ -441,8 +441,8 @@ of algorithms
 tested with
 parameters and
 performance</note>
-      <xloc>1136</xloc>
-      <yloc>288</yloc>
+      <xloc>720</xloc>
+      <yloc>224</yloc>
       <width>102</width>
       <heigth>90</heigth>
       <fontname>Segoe UI</fontname>
@@ -485,11 +485,11 @@ performance</note>
       <note>2. Feature Engineering
 
 'Flag' to indicate whether 
-billing and shipping zip codes are 
-equal.</note>
-      <xloc>304</xloc>
+billing and shipping zip
+codes are equal.</note>
+      <xloc>320</xloc>
       <yloc>400</yloc>
-      <width>190</width>
+      <width>147</width>
       <heigth>89</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -509,11 +509,11 @@ equal.</note>
     <notepad>
       <note>1. Data Wrangling
 
-Join and blend data from different
-sources.</note>
-      <xloc>16</xloc>
-      <yloc>160</yloc>
-      <width>191</width>
+Join and blend data
+from different sources.</note>
+      <xloc>80</xloc>
+      <yloc>176</yloc>
+      <width>130</width>
       <heigth>73</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -554,7 +554,7 @@ sources.</note>
     </hop>
     <hop>
       <from>csvi-customer transaction</from>
-      <to>slkp transaction_details</to>
+      <to>slkp-transaction_details</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -564,11 +564,11 @@ sources.</note>
     </hop>
     <hop>
       <from>slkp-customer</from>
-      <to>slkp transaction_details</to>
+      <to>slkp-transaction_details</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>slkp transaction_details</from>
+      <from>slkp-transaction_details</from>
       <to>slkp-transaction_fraud_report</to>
       <enabled>Y</enabled>
     </hop>
@@ -583,11 +583,6 @@ sources.</note>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>frmla-billing_shipping_zip_equal</from>
-      <to>auto machine learning</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>auto machine learning</from>
       <to>filter invalid</to>
       <enabled>N</enabled>
@@ -599,7 +594,7 @@ sources.</note>
     </hop>
     <hop>
       <from>trim</from>
-      <to>Text file output</to>
+      <to>tfo-model_catalogue</to>
       <enabled>N</enabled>
     </hop>
     <hop>
@@ -611,6 +606,11 @@ sources.</note>
       <from>sv-change_to_numbers</from>
       <to>tfo-TPOT</to>
       <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv-change_to_numbers</from>
+      <to>auto machine learning</to>
+      <enabled>N</enabled>
     </hop>
   </order>
   <step>
@@ -820,7 +820,7 @@ sources.</note>
     </GUI>
   </step>
   <step>
-    <name>Text file output</name>
+    <name>tfo-model_catalogue</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -986,25 +986,23 @@ sources.</note>
     <step-props secure="">
       <group name="">
         <property group="" name="SCRIPT">
-          <value xsi:type="xs:string">#to improve performance, increase number of generations and population size for 'tpot = TPOTClassifier(generations=1, verbosity=2,population_size=50, config_dict='TPOT light')'&#xd;
-&#xd;
-import pandas as pd&#xd;
+          <value xsi:type="xs:string">import pandas as pd&#xd;
 import numpy as np&#xd;
 &#xd;
 from tpot import TPOTClassifier&#xd;
 from sklearn import preprocessing&#xd;
 from sklearn.model_selection import train_test_split&#xd;
 &#xd;
-x = cust.iloc[:,0:-1].values #returns a numpy array&#xd;
+x = dataset.iloc[:,1:-1].values &#xd;
 min_max_scaler = preprocessing.MinMaxScaler()&#xd;
 x_scaled = min_max_scaler.fit_transform(x)&#xd;
 &#xd;
 X=np.asarray(x_scaled)&#xd;
-y=np.asarray(cust.iloc[:,-1])&#xd;
+y=np.asarray(dataset.iloc[:,-1])&#xd;
 &#xd;
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=None)&#xd;
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.75, random_state=None)&#xd;
 &#xd;
-tpot = TPOTClassifier(generations=1, verbosity=2,population_size=50, scoring='accuracy', config_dict='TPOT light')&#xd;
+tpot = TPOTClassifier(generations=1, verbosity=2,population_size=100, scoring='accuracy', config_dict='TPOT light')&#xd;
 tpot.fit(X_train, y_train)&#xd;
 output_score=str(tpot.score(X_test, y_test))&#xd;
 tpot.export('tpot_creditcard_pipeline.py')&#xd;
@@ -1093,39 +1091,81 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
         <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PDI_NAMES"/>
         <property group="" name="INPUT_ROWBYROW_MAPPING.FIELD_PDI_TYPES"/>
         <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_STEP_NAMES">
-          <value xsi:type="xs:string">frmla-billing_shipping_zip_equal</value>
-          <value xsi:type="xs:string">frmla-billing_shipping_zip_equal</value>
-          <value xsi:type="xs:string">frmla-billing_shipping_zip_equal</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
+          <value xsi:type="xs:string">sv-change_to_numbers</value>
         </property>
         <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_VAR_NAMES">
-          <value xsi:type="xs:string">cust</value>
-          <value xsi:type="xs:string">cust</value>
-          <value xsi:type="xs:string">cust</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
+          <value xsi:type="xs:string">dataset</value>
         </property>
         <property group="" name="INPUT_ALLROWS_MAPPING.INPUT_DATA_STRUCTURES">
           <value xsi:type="xs:string">Pandas dataframe</value>
           <value xsi:type="xs:string">Pandas dataframe</value>
           <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
+          <value xsi:type="xs:string">Pandas dataframe</value>
         </property>
         <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PYTHON_NAMES">
+          <value xsi:type="xs:string">first_time_customer</value>
+          <value xsi:type="xs:string">order_dollar_amount</value>
+          <value xsi:type="xs:string">num_items</value>
+          <value xsi:type="xs:string">age</value>
+          <value xsi:type="xs:string">web_order</value>
+          <value xsi:type="xs:string">total_transactions_to_date</value>
           <value xsi:type="xs:string">hour_of_day</value>
           <value xsi:type="xs:string">billing_shipping_zip_equal</value>
           <value xsi:type="xs:string">reported_as_fraud_historic</value>
         </property>
         <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PYTHON_TYPES">
+          <value xsi:type="xs:string">float64</value>
+          <value xsi:type="xs:string">float64</value>
           <value xsi:type="xs:string">int64</value>
-          <value xsi:type="xs:string">bool</value>
-          <value xsi:type="xs:string">bool</value>
+          <value xsi:type="xs:string">float64</value>
+          <value xsi:type="xs:string">float64</value>
+          <value xsi:type="xs:string">int64</value>
+          <value xsi:type="xs:string">int64</value>
+          <value xsi:type="xs:string">float64</value>
+          <value xsi:type="xs:string">float64</value>
         </property>
         <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PDI_NAMES">
+          <value xsi:type="xs:string">first_time_customer</value>
+          <value xsi:type="xs:string">order_dollar_amount</value>
+          <value xsi:type="xs:string">num_items</value>
+          <value xsi:type="xs:string">age</value>
+          <value xsi:type="xs:string">web_order</value>
+          <value xsi:type="xs:string">total_transactions_to_date</value>
           <value xsi:type="xs:string">hour_of_day</value>
           <value xsi:type="xs:string">billing_shipping_zip_equal</value>
           <value xsi:type="xs:string">reported_as_fraud_historic</value>
         </property>
         <property group="" name="INPUT_ALLROWS_MAPPING.FIELD_PDI_TYPES">
           <value xsi:type="xs:string">Number</value>
-          <value xsi:type="xs:string">Boolean</value>
-          <value xsi:type="xs:string">Boolean</value>
+          <value xsi:type="xs:string">Number</value>
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">Number</value>
+          <value xsi:type="xs:string">Number</value>
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">Integer</value>
+          <value xsi:type="xs:string">Number</value>
+          <value xsi:type="xs:string">Number</value>
         </property>
         <property group="" name="EMBED_USE_ENV">
           <value xsi:type="xs:boolean">true</value>
@@ -1150,7 +1190,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>736</xloc>
       <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1757,7 +1797,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     <name>frmla-billing_shipping_zip_equal</name>
     <type>Formula</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1787,7 +1827,7 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     </GUI>
   </step>
   <step>
-    <name>slkp transaction_details</name>
+    <name>slkp-transaction_details</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2025,6 +2065,129 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     </GUI>
   </step>
   <step>
+    <name>sv-change_to_numbers</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>first_time_customer</name>
+      </field>
+      <field>
+        <name>order_dollar_amount</name>
+      </field>
+      <field>
+        <name>num_items</name>
+      </field>
+      <field>
+        <name>age</name>
+      </field>
+      <field>
+        <name>web_order</name>
+      </field>
+      <field>
+        <name>total_transactions_to_date</name>
+      </field>
+      <field>
+        <name>hour_of_day</name>
+      </field>
+      <field>
+        <name>billing_shipping_zip_equal</name>
+      </field>
+      <field>
+        <name>reported_as_fraud_historic</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>first_time_customer</name>
+        <rename>first_time_customer</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>web_order</name>
+        <rename>web_order</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>billing_shipping_zip_equal</name>
+        <rename>billing_shipping_zip_equal</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>reported_as_fraud_historic</name>
+        <rename>reported_as_fraud_historic</rename>
+        <type>Number</type>
+        <length>1</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>sv-clean_values</name>
     <type>SelectValues</type>
     <description/>
@@ -2256,8 +2419,8 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>288</yloc>
+      <xloc>416</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2301,138 +2464,6 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
       <draw>Y</draw>
     </GUI>
   </step>
-  <step>
-    <name>sv-change_to_numbers</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>first_time_customer</name>
-        <rename/>
-      </field>
-      <field>
-        <name>order_dollar_amount</name>
-        <rename/>
-      </field>
-      <field>
-        <name>num_items</name>
-        <rename/>
-      </field>
-      <field>
-        <name>age</name>
-        <rename/>
-      </field>
-      <field>
-        <name>web_order</name>
-        <rename/>
-      </field>
-      <field>
-        <name>total_transactions_to_date</name>
-        <rename/>
-      </field>
-      <field>
-        <name>hour_of_day</name>
-        <rename/>
-      </field>
-      <field>
-        <name>billing_shipping_zip_equal</name>
-        <rename/>
-      </field>
-      <field>
-        <name>reported_as_fraud_historic</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>first_time_customer</name>
-        <rename>first_time_customer</rename>
-        <type>Number</type>
-        <length>1</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>web_order</name>
-        <rename>web_order</rename>
-        <type>Number</type>
-        <length>1</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>billing_shipping_zip_equal</name>
-        <rename>billing_shipping_zip_equal</rename>
-        <type>Number</type>
-        <length>1</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>reported_as_fraud_historic</name>
-        <rename>reported_as_fraud_historic</rename>
-        <type>Number</type>
-        <length>1</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step_error_handling>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
@@ -2442,7 +2473,11 @@ model_df=pd.DataFrame(model_list,columns=['pipe','generation','mutation','crosso
     <group>
       <name>explorerState</name>
       <attribute>
-        <key>sv-change_to_numbers</key>
+        <key>slkp-transaction_details</key>
+        <value/>
+      </attribute>
+      <attribute>
+        <key>tfo-model_catalogue</key>
         <value/>
       </attribute>
     </group>

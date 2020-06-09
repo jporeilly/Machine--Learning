@@ -1412,26 +1412,16 @@ FROM strataml_customer_billing
     <output_is_raw_text>N</output_is_raw_text>
     <strings_as_factors>Y</strings_as_factors>
     <include_input_as_output>N</include_input_as_output>
-    <script># Load Random Forest Package
-library(randomForest)
+    <script>library(randomForest)
 
-# Convert Test Data to Data Frame
 test.df &lt;- as.data.frame(test)
-
-# Load Random Forest Model
-load("C:\\DataOps\\MLO\\labs\\fraud\\solution\\train_model_output\\rf.rdata")
-
-# Predict
+load("C:\\Machine--Learning\\Lab_02_Credit_Card_Fraud\\train_model_output\\rf.rdata")
 pred &lt;- predict(rf, newdata = test.df)
-
-# Convert to Data Frame
 pred.df &lt;- as.data.frame(pred)
 
-# Prepare output data
 submission &lt;- data.frame(cbind(test.df,pred.df))
-
-# Output data
 submission
+
 
 
 </script>
@@ -1706,35 +1696,27 @@ submission
     <fields>
       <field>
         <name>first_time_customer</name>
-        <rename/>
       </field>
       <field>
         <name>order_dollar_amount</name>
-        <rename/>
       </field>
       <field>
         <name>num_items</name>
-        <rename/>
       </field>
       <field>
         <name>age</name>
-        <rename/>
       </field>
       <field>
         <name>web_order</name>
-        <rename/>
       </field>
       <field>
         <name>total_transactions_to_date</name>
-        <rename/>
       </field>
       <field>
         <name>hour_of_day</name>
-        <rename/>
       </field>
       <field>
         <name>billing_shipping_zip_equal</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1817,95 +1799,72 @@ submission
     <fields>
       <field>
         <name>customer_name</name>
-        <rename/>
       </field>
       <field>
         <name>customer_id</name>
-        <rename/>
       </field>
       <field>
         <name>customer_billing_zip</name>
-        <rename/>
       </field>
       <field>
         <name>transaction_id</name>
-        <rename/>
       </field>
       <field>
         <name>card_number</name>
-        <rename/>
       </field>
       <field>
         <name>expiry_date</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_address</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_city</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_country</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_customer_number</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_email</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_name</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_phone</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_state</name>
-        <rename/>
       </field>
       <field>
         <name>ship_to_zip</name>
-        <rename/>
       </field>
       <field>
         <name>first_time_customer</name>
-        <rename/>
       </field>
       <field>
         <name>order_dollar_amount</name>
-        <rename/>
       </field>
       <field>
         <name>num_items</name>
-        <rename/>
       </field>
       <field>
         <name>age</name>
-        <rename/>
       </field>
       <field>
         <name>web_order</name>
-        <rename/>
       </field>
       <field>
         <name>total_transactions_to_date</name>
-        <rename/>
       </field>
       <field>
         <name>hour_of_day</name>
-        <rename/>
       </field>
       <field>
         <name>billing_shipping_zip_equal</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
