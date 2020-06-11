@@ -21,11 +21,11 @@ IF '%x%' == '%x%' GOTO Item_%x%
 
 :Item_1
 SET DIR="C:\Machine--Learning\"
-IF EXIST %DIR% RMDIR /S /Q 
+IF EXIST %DIR% RMDIR /S /Q %DIR%\01_Credit_Card
 GOTO :NOFOLDER
 IF NOT EXIST %DIR% GOTO NOFOLDER
 :NOFOLDER
 MD %DIR%
 CD %DIR%
-git clone https://github.com/jporeilly/Machine--Learning.git .
+git clone https://github.com/jporeilly/Machine--Learning.git 01_Credit_Card
 EXIT
