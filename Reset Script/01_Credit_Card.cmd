@@ -27,5 +27,5 @@ IF NOT EXIST %DIR% GOTO NOFOLDER
 :NOFOLDER
 MD %DIR%
 CD %DIR%
-git clone https://github.com/jporeilly/Machine--Learning.git 01_Credit_Card
+git clone https://github.com/jporeilly/Machine--Learning.git .
 EXIT
