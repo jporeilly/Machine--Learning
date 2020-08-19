@@ -535,12 +535,12 @@ from different sources.</note>
     <hop>
       <from>sv-clean_values</from>
       <to>trim</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>filter invalid</from>
       <to>sv-clean_values</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>csvi-customer   </from>
@@ -585,17 +585,17 @@ from different sources.</note>
     <hop>
       <from>auto machine learning</from>
       <to>filter invalid</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>trim</from>
       <to>Microsoft Excel writer</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>trim</from>
       <to>tfo-model_catalogue</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>frmla-billing_shipping_zip_equal</from>
@@ -610,7 +610,7 @@ from different sources.</note>
     <hop>
       <from>sv-change_to_numbers</from>
       <to>auto machine learning</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
   </order>
   <step>
@@ -845,7 +845,7 @@ min_max_scaler = preprocessing.MinMaxScaler()&#xd;
 x_scaled = min_max_scaler.fit_transform(x)&#xd;
 &#xd;
 X=np.asarray(x_scaled)&#xd;
-y=np.asarray(dataset.iloc[:,-1])&#xd;
+y=np.asarray(dataset.iloc[:,8])&#xd;
 &#xd;
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.75, random_state=None)&#xd;
 &#xd;
