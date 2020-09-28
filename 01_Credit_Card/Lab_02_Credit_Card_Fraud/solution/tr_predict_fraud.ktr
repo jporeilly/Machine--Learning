@@ -683,7 +683,7 @@ Score probability of fraud</note>
     </hop>
     <hop>
       <from>rscrpt-predict</from>
-      <to>msxlsx-predective</to>
+      <to>msxlsx-predict</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -1220,7 +1220,7 @@ FROM strataml_customer_billing
     </GUI>
   </step>
   <step>
-    <name>msxlsx-predective</name>
+    <name>msxlsx-predict</name>
     <type>TypeExitExcelWriterStep</type>
     <description/>
     <distribute>Y</distribute>
@@ -2037,6 +2037,10 @@ submission
   <attributes>
     <group>
       <name>explorerState</name>
+      <attribute>
+        <key>msxlsx-predict</key>
+        <value/>
+      </attribute>
     </group>
   </attributes>
 </transformation>
